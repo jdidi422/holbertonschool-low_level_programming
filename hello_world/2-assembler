@@ -1,2 +1,2 @@
 #!/bin/bash
-export CFILE=2-main.c; gcc -o output_program $CFILE && ./output_program
+gcc -S "$CFILE" -o "${CFILE%.c}.s"
