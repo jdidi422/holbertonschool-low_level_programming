@@ -1,11 +1,13 @@
 #include "main.h"
 
-int main(void) {
-    // String to print
-    char str[] = "_putchar\n"; 
-    for (int i = 0; str[i] != '\0'; i++) {
-        _putchar(str[i]); // Print each character
-    }
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+    print_alphabet();
+    return (0);
+}
 
-    return 0; // Return 0 to indicate successful completion
-} // Ensure there's a newline after this line
