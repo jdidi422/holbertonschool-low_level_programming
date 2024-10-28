@@ -1,4 +1,4 @@
-#include "main.h"
+#includ0-isupper.ce "main.h"
 /**
  *_isupper - function that verifies if a  character is uppercase or not
  *@c: tested character
