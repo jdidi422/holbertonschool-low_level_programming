@@ -16,8 +16,7 @@ int main(void)
     printf("n=%d\n", n);
     return (0);
 }
- #include "main.h"
-#include <stdio.h>
+
 
 /**
  * main - check the code
