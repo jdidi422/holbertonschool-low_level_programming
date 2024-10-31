@@ -1,18 +1,21 @@
 #include "main.h"
 /**
- *print_rev- prints a string, in reverse, followed by a new line.
- *@s: char
- *Return: 0
- */
-void print_rev(char *s)
-{
-	int i = 0;
+ * _strcmp - check the code
+ * Description: compare two strings :)
+ * @s1 : pointer to string1
+ * @s2 : pointer to string2
+ * Return: int
+*/
 
-	while (s[i] != '\0')
-		i++;
-	while (i--)
+int _strcmp(char *s1, char *s2)
+{
+	int res = 0;
+
+	while (*s1 != '\0' && *s2 != '\0' && res == 0)
 	{
-		_putchar(s[i]);
+		res = *s1 - *s2;
+		s1++;
+		s2++;
 	}
-	_putchar('\n');
-}
+	return (res);
+}}
