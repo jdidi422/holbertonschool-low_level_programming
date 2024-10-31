@@ -1,24 +1,23 @@
 #include "main.h"
-#include <stdio.h>
-#include <string.h>
 /**
- * _strcat - check the code
- * @src : char
- * @dest : char
- * Return: dest.
+ **_strcat- dest+src
+ *@dest:char
+ *@src:char
+ *Return:dest
  */
-
 char *_strcat(char *dest, char *src)
 {
-	int i = 0;
-	int len = strlen(dest);
-
-	while (src[i] != '\0')
-	{
-		dest[len] = src[i];
-		i++;
-		len++;
-	}
-	dest[len] = '\0';
-	return (dest);
+int i = 0;
+int j = 0;
+while (dest[i] != '\0')
+{
+i++;
+}
+while (src[j] != '\0')
+{
+dest[i] = src[j];
+j++;
+i++;
+}
+return (dest);
 }
