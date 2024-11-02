@@ -1,4 +1,6 @@
 #include "main.h"
+#include <string.h>
+/* rest of your code */
 /**
  * leet - check the code
  * @s: pointer to the string to be executed
