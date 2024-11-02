@@ -1,25 +1,23 @@
-#include "main.h"
-#include <string.h>
-/* rest of your code */
 /**
- * leet - check the code
- * @s: pointer to the string to be executed
- * Return: void
+ * leet - encode string to 1337
+ * @s: string to encode
+ * Return: pointer to encoded string
  */
 char *leet(char *s)
 {
-	int j, i, l = 0;
-	char T[5] = {'A', 'E', 'O', 'T', 'L'};
-	char V[5] = {'4', '3', '0', '7', '1'};
+	char *ptr = s;
+	char a[] = {'a', 'e', 'o', 't', 'l'};
+	char n[] = {4, 3, 0, 7, 1};
+	int i = 0;
 
-	l = strlen(s);
-	for (i = 0; i < l; i++)
+	while (*s)
 	{
-		for (j = 0; j < 5; j++)
+		for (i = 0; i < 5; i++)
 		{
-			if (s[i] == T[j] || s[i] == T[j] + 32)
-				s[i] = V[j];
+			if (*s == a[i] || *s == a[i] - 32)
+				*s = n[i] + '0';
 		}
+		s++;
 	}
-	return (s);
+	return (ptr);
 }
