@@ -30,3 +30,5 @@ return (NULL);
 }
 strcpy(con, s1);
 strcat(con, s2);
+return (con);
+}
