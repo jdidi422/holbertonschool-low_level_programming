@@ -2,22 +2,28 @@
 #include <stdlib.h>
 #include "main.h"
 /**
- * _strdup - Entry point
- * @str : char
+ * create_array - Entry point
+ * @size : integer
+ * @c : char
  * Return: void (Success)
  */
-char *_strdup(char *str)
+char *create_array(unsigned int size, char c)
 {
-int i = 0;
-if (str == NULL)
+unsigned int i = 0;
+char *cs;
+if (size == 0)
 {
 return (NULL);
 }
-while (str[i] != '\0')
+cs = malloc(sizeof(char) * size);
+if (cs == NULL)
 {
+return (0);
+}
+while (i < size)
+{
+cs[i] = c;
 i++;
 }
-printf("%s", str);
-str = malloc(sizeof(char) * i + 1);
-return (str);
+return (cs);
 }
