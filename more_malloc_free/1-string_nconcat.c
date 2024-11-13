@@ -34,6 +34,6 @@ strcpy(result, s1);
 if (n < len2)
 strncat(result, s2, n);
 else
-trcat(result, s2);
+strcat(result, s2);
 return (result);
 }
