@@ -1,38 +1,40 @@
 #include "main.h"
 
-
 /**
- * string_nconcat - Entry point
- * @s1 : char
- * @s2 : char
- * @n : int
- * Return: void (Success)
+ * string_nconcat - Concatenates two strings.
+ * @s1: The first string.
+ * @s2: The second string.
+ * @n: The number of bytes to take from s2.
+ *
+ * Return: A pointer to the newly allocated space containing s1 followed
+ *         by the first n bytes of s2, or NULL if it fails.
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-unsigned int len1, len2, total_len;
-char *result;
+    char *result;
+    unsigned int len1, len2, i, j;
+
 if (s1 == NULL)
-{
 s1 = "";
-}
 if (s2 == NULL)
-{
 s2 = "";
-}
-len1 = strlen(s1);
-len2 = strlen(s2);
+
+len1 = 0;
+while (s1[len1] != '\0')
+len1++;
+len2 = 0;
+while (s2[len2] != '\0')
+len2++;
 if (n >= len2)
-total_len = len1 + len2;
-else
-total_len = len1 + n;
-result = malloc(total_len + 1);
+n = len2;
+result = malloc(sizeof(char) * (len1 + n + 1));
 if (result == NULL)
 return (NULL);
-strcpy(result, s1);
-if (n < len2)
-strncat(result, s2, n);
-else
-strcat(result, s2);
+
+for (i = 0; i < len1; i++)
+result[i] = s1[i];
+for (j = 0; j < n; j++)
+result[i + j] = s2[j];
+result[i + j] = '\0';
 return (result);
 }
