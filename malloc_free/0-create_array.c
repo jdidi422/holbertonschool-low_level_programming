@@ -1,5 +1,6 @@
 #include <stdlib.h>
-#include <cstddef>
+#include <stddef.h>
+
 /**
  * create_array - Creates an array initialized with a char
  * @size: Size of the array
@@ -7,8 +8,6 @@
  *
  * Return: Pointer to array, or NULL if size is 0 or malloc fails
  */
-
-
 
 char *create_array(unsigned int size, char c)
 {
