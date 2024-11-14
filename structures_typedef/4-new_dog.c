@@ -1,39 +1,48 @@
 #include "dog.h"
 #include <stdio.h>
 
+
 /**
- * *new_dog - check the code
- * @name : char
- * @age : float
- * @owner : char
- * Return: Always 0.
+ * new_dog -function that creates a new dog.
+ * @name: the  dog name
+ * @age: age of the dog
+ * @owner: the owner
+ * Return: dog_t
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-dog_t *d;
-int l1, l2;
-d = malloc(sizeof(dog_t));
-if (d == NULL)
+dog_t *newdog;
+if (name == NULL)
 {
 return (NULL);
 }
-l1 = strlen(name);
-d->name = malloc(sizeof(char) * (l1 + 1));
-if (d->name == NULL)
+if (owner == NULL)
 {
-free(d);
 return (NULL);
 }
-l2 = strlen(owner);
-d->owner = malloc(sizeof(char) * (l2 + 1));
-if (d->owner == NULL)
+if (age < 0)
 {
-free(d->name);
-free(d);
 return (NULL);
 }
-strcpy(d->name, name);
-d->age = age;
-strcpy(d->owner, owner);
-return (d);
+newdog = malloc(sizeof(dog_t));
+if (newdog == NULL)
+{
+return (NULL);
+}
+newdog->name = malloc(sizeof(char) * (strlen(name) + 1));
+if (newdog->name == NULL)
+{
+free(newdog);
+return (NULL);
+}
+newdog->owner = malloc(sizeof(char) * (strlen(owner) + 1));
+if (newdog->owner == NULL)
+{
+free(newdog);
+return (NULL);
+}
+newdog->name = strcpy(newdog->name, name);
+newdog->age = age;
+newdog->owner = strcpy(newdog->owner, owner);
+return (newdog);
 }
