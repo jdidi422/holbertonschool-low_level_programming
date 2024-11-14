@@ -1,8 +1,6 @@
+
+
 #include "dog.h"
-#include <stdio.h>
-
-
-
 /**
  * *new_dog - check the code
  * @name : char
