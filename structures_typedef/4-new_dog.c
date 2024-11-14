@@ -36,7 +36,6 @@ newdog->owner = malloc(sizeof(char) * (strlen(owner) + 1));
 if (newdog->owner == NULL)
 {
 free(newdog);
-free(newdog->name);
 return (NULL);
 }
 newdog->name = strcpy(newdog->name, name);
