@@ -2,30 +2,32 @@
 #include <stdlib.h>
 
 /**
- * read_textfile - a function that reads a text file and
- * prints it to the POSIX standard output.
- * @filename : the name of the file
- * @letters: letters to print
- *
- * Return: the actual number of letters it could read and print.
+ * binary_to_uint - This funtion convert binary to decimal
+ * @b: This is my string of entry
+ * Return: This return to a digital number
  */
-ssize_t read_textfile(const char *filename, size_t letters)
-
+unsigned int binary_to_uint(const char *b)
 {
-int file;
-ssize_t bytes;
-char buffer[1024 * 8];
-if (!filename || !letters)
+unsigned int decimal = 0;
+int multiplicador = 1, index = 0;
+if (b == NULL)
+return (0);
+for (index = 0; b[index] != '\0'; index++)
 {
+if (b[index] != '0' && b[index] != '1')
 return (0);
 }
-file = open(filename, O_RDONLY);
-if (file == -1)
+for (index = index - 1; index >= 0; index--)
 {
-return (0);
+char currentCharacter;
+currentCharacter = b[index];
+if (currentCharacter == '1')
+{
+decimal += multiplicador;
 }
-bytes = read(file, &buffer[0], letters);
-bytes = write(STDOUT_FILENO, &buffer[0], bytes);
-close(file);
-return (bytes);
+multiplicador = multiplicador * 2;
+if (index == 0)
+break;
+}
+return (decimal);
 }
