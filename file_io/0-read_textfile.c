@@ -1,33 +1,43 @@
 #include "main.h"
-#include <stdlib.h>
 
 /**
- * binary_to_uint - This funtion convert binary to decimal
- * @b: This is my string of entry
- * Return: This return to a digital number
+ * read_textfile - Reads a file and prints it to the POSIX output.
+ * @filename: The name of the file to read.
+ * @letters: The number of letters to read and print.
+ *
+ * Return: The actual number of letters read and printed, or 0 on failure.
  */
-unsigned int binary_to_uint(const char *b)
+ssize_t read_textfile(const char *filename, size_t letters)
 {
-unsigned int decimal = 0;
-int multiplicador = 1, index = 0;
-if (b == NULL)
+int fd;
+ssize_t bytes_read, bytes_written;
+char *buffer;
+if (filename == NULL)
 return (0);
-for (index = 0; b[index] != '\0'; index++)
+fd = open(filename, O_RDONLY);
+if (fd == -1)
+return (0);
+buffer = malloc(sizeof(char) * letters);
+if (buffer == NULL)
 {
-if (b[index] != '0' && b[index] != '1')
+close(fd);
 return (0);
 }
-for (index = index - 1; index >= 0; index--)
+bytes_read = read(fd, buffer, letters);
+if (bytes_read == -1)
 {
-char currentCharacter;
-currentCharacter = b[index];
-if (currentCharacter == '1')
+free(buffer);
+close(fd);
+return (0);
+}
+bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
+if (bytes_written == -1 || bytes_written != bytes_read)
 {
-decimal += multiplicador;
+free(buffer);
+close(fd);
+return (0);
 }
-multiplicador = multiplicador * 2;
-if (index == 0)
-break;
-}
-return (decimal);
+free(buffer);
+close(fd);
+return (bytes_written);
 }
