@@ -21,4 +21,3 @@ return (-1);
 write(file, text_content, length);
 return (1);
 }
- 
