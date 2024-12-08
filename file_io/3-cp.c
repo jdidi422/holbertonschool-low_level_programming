@@ -1,63 +1,52 @@
-#include <stdio.h>
 #include "main.h"
+#include <stdio.h>
+
 
 /**
-  * main - Entry point
-  * @argc: The argument count
-  * @argv: The argument vector
-  *
-  * Return: ...
-  */
+ * main - Entry point.
+ * @argc : number of argument
+ * @argv: arguments
+ *
+ * Return: 0.
+ */
 int main(int argc, char **argv)
 {
+int fromFile, toFile, READ, WRITE;
+mode_t MODE = S_IRUSR | S_IWUSR | S_IWGRP | S_IRGRP | S_IROTH;
+char buffer[1024];
 if (argc != 3)
+dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
+fromFile = open(argv[1], O_RDONLY);
+if (fromFile == -1)
 {
-dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-exit(97);
-}
-copy_file(argv[1], argv[2]);
-exit(0);
-}
-
-/**
-  * copy_file - ...
-  * @src: ...
-  * @dest: ...
-  *
-  * Return: ...
-  */
-void copy_file(const char *src, const char *dest)
-{
-int ofd, tfd, readed;
-char buff[1024];
-ofd = open(src, O_RDONLY);
-if (!src || ofd == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", src);
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 exit(98);
 }
-tfd = open(dest, O_CREAT | O_WRONLY | O_TRUNC, 0664);
-while ((readed = read(ofd, buff, 1024)) > 0)
+toFile = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, MODE);
+if (toFile == -1)
 {
-if (write(tfd, buff, readed) != readed || tfd == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't write to %s\n", dest);
+dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 exit(99);
 }
-}
-if (readed == -1)
+READ = 1;
+while (READ)
 {
-dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", src);
+READ = read(fromFile, buffer, 1024);
+if (READ == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 exit(98);
 }
-if (close(ofd) == -1)
+if (0 < READ)
 {
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", ofd);
-exit(100);
+WRITE = write(toFile, buffer, READ);
+if (WRITE != READ || -1 == WRITE)
+dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
 }
-if (close(tfd) == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", tfd);
-exit(100);
 }
+if (close(fromFile) == -1)
+dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fromFile), exit(100);
+if (close(toFile) == -1)
+dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", toFile), exit(100);
+return (0);
 }
